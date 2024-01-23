@@ -56,7 +56,7 @@ public class DfaReader {
     }
 
     public static String selectFile() {
-        String pathToFile = "";
+        String pathToFile = "sampleFSM/ConvertedUserAutomata.txt";
         Scanner scanner = new Scanner(System.in);
         while (pathToFile.isEmpty()) {
             System.out.println("enter valid absolute path to file  ");

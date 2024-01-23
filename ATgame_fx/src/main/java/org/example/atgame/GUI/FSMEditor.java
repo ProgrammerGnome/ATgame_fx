@@ -7,12 +7,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class FSMEditor {
 
@@ -113,44 +116,85 @@ public class FSMEditor {
         }
     }
 
+//    @FXML
+//    private void exportFSM() {
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Export FSM");
+//        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+//        java.io.File file = fileChooser.showSaveDialog(canvas.getScene().getWindow());
+//
+//        if (file != null) {
+//            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+//                writer.write("TRANSITIONS LIST: [");
+//
+//                for (int i = 0; i < transitions.size(); i++) {
+//                    Transition transition = transitions.get(i);
+//
+//                    writer.write(transition.getStartState() + " - " + transition.getTransitionChar() + " - " + transition.getEndState());
+//
+//                    if (i < transitions.size() - 1) {
+//                        writer.write(", ");
+//                    }
+//                }
+//
+//                writer.write("]");
+//
+//                // Új rész a kiskörös állapotok exportálásához
+//                var startList = new ArrayList<>(selectedStates2.keySet());
+//                writer.write("\nINITIAL STATE: " + startList);
+//
+//                // Új rész a kiskörös állapotok exportálásához
+//                var finalList = new ArrayList<>(selectedStates.keySet());
+//                writer.write("\nFINAL STATE(S): " + finalList +"\n");
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                showAlert("Error exporting FSM", "Error");
+//            }
+//        }
+//    }
+
     @FXML
     private void exportFSM() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Export FSM");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
-        java.io.File file = fileChooser.showSaveDialog(canvas.getScene().getWindow());
+        // Előre definiált könyvtár, ahova a fájlt menteni szeretnénk
+        String exportDirectoryPath = "sampleFSM/";
 
-        if (file != null) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                writer.write("TRANSITIONS LIST: [");
+        // Fájlnév kialakítása a könyvtárral és időbélyeggel
+        String fileName = "UserAutomata.txt";
+        String filePath = Paths.get(exportDirectoryPath, fileName).toString();
 
-                for (int i = 0; i < transitions.size(); i++) {
-                    Transition transition = transitions.get(i);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("TRANSITIONS LIST: [");
 
-                    writer.write(transition.getStartState() + " - " + transition.getTransitionChar() + " - " + transition.getEndState());
+            for (int i = 0; i < transitions.size(); i++) {
+                Transition transition = transitions.get(i);
 
-                    if (i < transitions.size() - 1) {
-                        writer.write(", ");
-                    }
+                writer.write(transition.getStartState() + " - " + transition.getTransitionChar() + " - " + transition.getEndState());
+
+                if (i < transitions.size() - 1) {
+                    writer.write(", ");
                 }
-
-                writer.write("]");
-
-                // Új rész a kiskörös állapotok exportálásához
-                var startList = new ArrayList<>(selectedStates2.keySet());
-                writer.write("\nINITIAL STATE: " + startList);
-
-                // Új rész a kiskörös állapotok exportálásához
-                var finalList = new ArrayList<>(selectedStates.keySet());
-                writer.write("\nFINAL STATE(S): " + finalList +"\n");
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                showAlert("Error exporting FSM", "Error");
             }
-        }
-    }
 
+            writer.write("]");
+
+            // Új rész a kiskörös állapotok exportálásához
+            var startList = new ArrayList<>(selectedStates2.keySet());
+            writer.write("\nINITIAL STATE: " + startList);
+
+            // Új rész a kiskörös állapotok exportálásához
+            var finalList = new ArrayList<>(selectedStates.keySet());
+            writer.write("\nFINAL STATE(S): " + finalList + "\n");
+
+            showAlert("FSM exported successfully", "Success");
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error exporting FSM", "Error");
+        }
+
+
+
+    }
 
     private void showAlert(String message, String title) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

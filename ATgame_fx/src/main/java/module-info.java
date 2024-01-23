@@ -3,7 +3,6 @@ module org.example.atgame {
     requires javafx.fxml;
     requires rgxgen;
 
-
     opens org.example.atgame to javafx.fxml;
     exports org.example.atgame;
     exports org.example.atgame.GUI;

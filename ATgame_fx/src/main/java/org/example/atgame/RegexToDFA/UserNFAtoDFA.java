@@ -21,7 +21,8 @@ public class UserNFAtoDFA {
         List<String> atmenetLista = userAutFileReader("pelda.txt"); // TODO: módosításra szorul
         //System.out.println(atmenetLista);
 
-        regexp = "(aba)*a|b";
+        regexp = "a(y*a(y*a(y*bccb|abc)|ab|b)|lta)|4e453";
+        // (aba)*a|b
 //        System.out.println("Welcome. Please enter a regexp.");
 //        System.out.println("NOTE:\n" +
 //                " * Valid characters:\n" +

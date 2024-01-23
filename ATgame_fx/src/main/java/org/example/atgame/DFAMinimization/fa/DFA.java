@@ -241,7 +241,7 @@ public class DFA {
             }
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("minDFA.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("sampleFSM/minUserDFA.txt"))) {
             writer.write(c + "\n");
             writer.write("start " + this.getInitialState().getId());
             writer.newLine();

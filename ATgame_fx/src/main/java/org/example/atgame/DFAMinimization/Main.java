@@ -19,35 +19,23 @@ public class Main {
     }
 
     public static void menu() {
-        while (true) {
-            System.out.println("\nWould you like to: \n1)generate new dfa(s) \n2)read existing ");
-            int option = 0;
-            Scanner scanner = new Scanner(System.in);
-            while (option > 2 || option < 1) {
-                option = scanner.nextInt();
-                if (option > 2 || option < 1) {
-                    System.out.println("invalid input");
-                    System.out.println("\nWould you like to: \n1)generate new dfa(s) \n2)read existing ");
-                }
-            }
-            if (option == 1) {
-                menu1();
-            }
-            if (option == 2) {
-                menu2();
-            }
-            System.out.println("\nWould you like to continue? \n[Y/y] - yes \n[N/n] - no ");
-            char c = 'e';
-            c = scanner.next().charAt(0);
-            while (!(c == 'n' || c == 'N' || c == 'y' || c == 'Y')) {
-                System.out.println("invalid input");
-                System.out.println("\nWould you like to continue? \n[Y/y] - yes \n[N/n] - no  ");
-                c = scanner.next().charAt(0);
-            }
-            if (c == 'n' || c == 'N') {
-                break;
-            }
-        }
+//        while (true) {
+        System.out.println("\nWould you like to: \n1)generate new dfa(s) \n2)read existing ");
+//        int option = 2;
+//        Scanner scanner = new Scanner(String.valueOf(option));
+        menu2();
+//            System.out.println("\nWould you like to continue? \n[Y/y] - yes \n[N/n] - no ");
+//            char c = 'e';
+//            c = scanner.next().charAt(0);
+//            while (!(c == 'n' || c == 'N' || c == 'y' || c == 'Y')) {
+//                System.out.println("invalid input");
+//                System.out.println("\nWould you like to continue? \n[Y/y] - yes \n[N/n] - no  ");
+//                c = scanner.next().charAt(0);
+//            }
+//            if (c == 'n' || c == 'N') {
+//                break;
+//            }
+//        }
     }
 
     public static void menu2() {
@@ -58,60 +46,60 @@ public class Main {
         minimization(option, dfa);
     }
 
-    public static void menu1() {
-        Scanner scanner = new Scanner(System.in);
-        String pathToFile = "";
-        System.out.println("enter the file directory");
-        while (pathToFile.isEmpty()) {
-            pathToFile = scanner.nextLine();
-            boolean b = checkDirectory(pathToFile);
-            if (!b) {
-                b = createDirectory(pathToFile);
-                if (!b) {
-                    pathToFile = "";
-                }
-            }
-        }
-        System.out.println("enter the number of files to generate(how many automata you want to generate): ");
-        int i = Integer.parseInt(scanner.nextLine());
-        System.out.println("enter the number of states: ");
-        int n = Integer.parseInt(scanner.nextLine());
-        System.out.println("enter the alphabet size: ");
-        int size = Integer.parseInt(scanner.nextLine());
-        Set<String> alphabet = newAlphabet(size);
-        DFA[] dfas = new DFA[i];
-        for (int j = 0; j < i; j++) {
-            DfaGenerator dfaGenerator = new DfaGenerator(pathToFile, n, alphabet, i);
-            dfas[j] = dfaGenerator.getDfa();
-        }
-        int option;
-        for (int j = 0; j < dfas.length; j++) {
-            System.out.println(" .....Minimizing " + (j + 1) + ". automaton..... ");
-            option = option();
-            minimization(option, dfas[j]);
-        }
-    }
+//    public static void menu1() {
+//        Scanner scanner = new Scanner(System.in);
+//        String pathToFile = "sampleFSM/dfa.txt";
+//        //System.out.println("enter the file directory");
+//        while (pathToFile.isEmpty()) {
+//            pathToFile = scanner.nextLine();
+//            boolean b = checkDirectory(pathToFile);
+//            if (!b) {
+//                b = createDirectory(pathToFile);
+//                if (!b) {
+//                    pathToFile = "";
+//                }
+//            }
+//        }
+//        System.out.println("enter the number of files to generate(how many automata you want to generate): ");
+//        int i = Integer.parseInt(scanner.nextLine());
+//        System.out.println("enter the number of states: ");
+//        int n = Integer.parseInt(scanner.nextLine());
+//        System.out.println("enter the alphabet size: ");
+//        int size = Integer.parseInt(scanner.nextLine());
+//        Set<String> alphabet = newAlphabet(size);
+//        DFA[] dfas = new DFA[i];
+//        for (int j = 0; j < i; j++) {
+//            DfaGenerator dfaGenerator = new DfaGenerator(pathToFile, n, alphabet, i);
+//            dfas[j] = dfaGenerator.getDfa();
+//        }
+//        int option;
+//        for (int j = 0; j < dfas.length; j++) {
+//            System.out.println(" .....Minimizing " + (j + 1) + ". automaton..... ");
+//            option = option();
+//            minimization(option, dfas[j]);
+//        }
+//    }
 
 
-    public static boolean checkDirectory(String path) {
-        boolean exists = false;
-        File directory = new File(path);
-        if (directory.exists()) {
-            exists = true;
-        }
-        return exists;
-    }
-
-    public static boolean createDirectory(String path) {
-        File file = new File(path);
-        boolean bool = file.mkdirs();
-        if (bool) {
-            System.out.println("Directory created successfully");
-            return true;
-        }
-        System.out.println("Sorry couldn't create specified directory");
-        return false;
-    }
+//    public static boolean checkDirectory(String path) {
+//        boolean exists = false;
+//        File directory = new File(path);
+//        if (directory.exists()) {
+//            exists = true;
+//        }
+//        return exists;
+//    }
+//
+//    public static boolean createDirectory(String path) {
+//        File file = new File(path);
+//        boolean bool = file.mkdirs();
+//        if (bool) {
+//            System.out.println("Directory created successfully");
+//            return true;
+//        }
+//        System.out.println("Sorry couldn't create specified directory");
+//        return false;
+//    }
 
     public static boolean useAnotherAlgorithm() {
         char c = 'e';
@@ -144,27 +132,28 @@ public class Main {
     public static int option() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("choose the algorithm:\n1)Watson");
-        String line = scanner.nextLine();
-        while (!algorithmOptionValidation(line)) {
-            System.out.println("invalid input");
-            System.out.println("choose the algorithm:\n1)Watson");
-            line = scanner.nextLine();
-        }
-        return Integer.parseInt(line);
+        //String line = scanner.nextLine();
+        Integer line = 1;
+//        while (!algorithmOptionValidation(line)) {
+//            System.out.println("invalid input");
+//            System.out.println("choose the algorithm:\n1)Watson");
+//            line = scanner.nextLine();
+//        }
+        return Integer.parseInt(line.toString());
     }
 
-    public static boolean algorithmOptionValidation(String line) {
-        return Helper.isNumeric(line) && Integer.parseInt(line) <= 4 && Integer.parseInt(line) > 0;
-    }
+//    public static boolean algorithmOptionValidation(String line) {
+//        return Helper.isNumeric(line) && Integer.parseInt(line) <= 4 && Integer.parseInt(line) > 0;
+//    }
 
-    public static Set<String> newAlphabet(int size) {
-        Set<String> a = new HashSet<String>();
-        char c;
-        for (int i = 0; i < size; i++) {
-            c = (char) (i + 'a');
-            a.add(String.valueOf(c));
-        }
-        return a;
-    }
+//    public static Set<String> newAlphabet(int size) {
+//        Set<String> a = new HashSet<String>();
+//        char c;
+//        for (int i = 0; i < size; i++) {
+//            c = (char) (i + 'a');
+//            a.add(String.valueOf(c));
+//        }
+//        return a;
+//    }
 
 }

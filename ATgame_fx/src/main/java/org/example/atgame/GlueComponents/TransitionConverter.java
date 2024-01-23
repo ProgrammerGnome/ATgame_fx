@@ -7,7 +7,7 @@ public class TransitionConverter {
 
     public static void main(String[] args) {
         try {
-            convertFile("pelda.txt", "output.txt");
+            convertFile("sampleFSM/UserAutomata.txt", "sampleFSM/ConvertedUserAutomata.txt");
             System.out.println("Conversion completed successfully.");
         } catch (IOException e) {
             e.printStackTrace();
