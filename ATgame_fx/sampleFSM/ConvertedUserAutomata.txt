@@ -1,0 +1,7 @@
+4
+start 0
+0 a 1
+1 b 2
+2 a 0
+0 b 3
+final 1 3 
