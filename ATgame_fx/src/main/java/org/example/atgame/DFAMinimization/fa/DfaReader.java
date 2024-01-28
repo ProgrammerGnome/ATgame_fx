@@ -12,8 +12,8 @@ public class DfaReader {
         this.dfa = new DFA();
     }
 
-    public void readDFA() {
-        readDFA(selectFile());
+    public void readDFA_main(String inputFile, String outputFile) {
+        readDFA(selectFile(inputFile, outputFile));
     }
 
     public void readDFA(String path) {
@@ -55,18 +55,18 @@ public class DfaReader {
         }
     }
 
-    public static String selectFile() {
-        String pathToFile = "sampleFSM/ConvertedUserAutomata.txt";
+    public static String selectFile(String inputFile, String outputFile) {
+        //String pathToFile = "sampleFSM/DFA_Input_2.txt";
         Scanner scanner = new Scanner(System.in);
-        while (pathToFile.isEmpty()) {
+        while (inputFile.isEmpty()) {
             System.out.println("enter valid absolute path to file  ");
-            pathToFile = scanner.nextLine();
-            if (!isValidPath(pathToFile)) {
+            inputFile = scanner.nextLine();
+            if (!isValidPath(inputFile)) {
                 System.out.println("invalid path to file ");
-                pathToFile = "";
+                inputFile = "";
             }
         }
-        return pathToFile;
+        return inputFile;
     }
 
     public static boolean isValidPath(String pathToFile) {

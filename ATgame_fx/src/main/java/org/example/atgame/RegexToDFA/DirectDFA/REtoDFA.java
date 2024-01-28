@@ -1,4 +1,4 @@
-package Implementation.DirectDFA;
+package org.example.atgame.RegexToDFA.DirectDFA;
 
 import java.util.*;
 

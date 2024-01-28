@@ -7,6 +7,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import org.example.atgame.DFAMinimization.MainMini;
+import org.example.atgame.GlueComponents.FileComparator;
+import org.example.atgame.GlueComponents.TransitionConverter;
+import org.example.atgame.NFAtoDFA.NFA_to_DFA;
+import org.example.atgame.RegexToDFA.UserNFAtoDFA;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -155,7 +160,7 @@ public class FSMEditor {
 //    }
 
     @FXML
-    private void exportFSM() {
+    private void exportFSM() throws IOException {
         // Előre definiált könyvtár, ahova a fájlt menteni szeretnénk
         String exportDirectoryPath = "sampleFSM/";
 
@@ -192,7 +197,60 @@ public class FSMEditor {
             showAlert("Error exporting FSM", "Error");
         }
 
+        /*
+          Egyéb (játékos) függvényhívások
+         */
 
+        // User's NFA to formatted NFA
+        TransitionConverter transitionConverter = new TransitionConverter();
+        transitionConverter.convertFile("sampleFSM/UserAutomata.txt", "sampleFSM/ConvertedUserAutomata.txt");
+        System.out.println("Conversion completed successfully. [ConvertedUserAutomata.txt written]");
+
+//        // User's formatted NFA to DFA
+//        NFA_to_DFA nfa_to_dfa = new NFA_to_DFA();
+//        nfa_to_dfa.nfa_to_dfa("sampleFSM/ConvertedUserAutomata.txt","sampleFSM/DFA_Input_User.txt");
+//        System.out.println("Success!!! [DFA_Input_User.txt written]");
+
+        // User's DFA minimized
+        MainMini mainMini = new MainMini();
+        mainMini.menu("sampleFSM/ConvertedUserAutomata.txt","sampleFSM/minUserDFA.txt");
+        System.out.println("Success!!! [minUserDFA.txt written]");
+
+        /*
+          Egyéb (gépi játékos) függvényhívások
+         */
+
+        // Machine's Regex to DFA
+        UserNFAtoDFA userNFAtoDFA = new UserNFAtoDFA();
+        userNFAtoDFA.writeFile();
+        System.out.println("Success!!! [machineDFA.txt written]");
+
+        // Machine DFA formalization
+        transitionConverter = new TransitionConverter();
+        transitionConverter.convertFile("sampleFSM/machineDFA.txt", "sampleFSM/formattedMachineDFA.txt");
+        System.out.println("Success!!! [formattedMachineDFA.txt written]");
+
+//        // User's formatted NFA to DFA
+//        nfa_to_dfa = new NFA_to_DFA();
+//        nfa_to_dfa.nfa_to_dfa("sampleFSM/formattedMachineDFA.txt","sampleFSM/DFA_Input_Machine.txt");
+//        System.out.println("Success!!! [DFA_Input_Machine.txt written]");
+
+        // Machine's DFA minimized
+        mainMini = new MainMini();
+        mainMini.menu("sampleFSM/formattedMachineDFA.txt","sampleFSM/minMachineDFA.txt");
+        System.out.println("Success!!! [minMachineDFA.txt written]");
+
+        /*
+          Gépi és felhasználói eredmény összehasonlítása
+         */
+        FileComparator fileComparator = new FileComparator();
+
+        boolean areFilesEqual = fileComparator.compareFiles("sampleFSM/minUserDFA.txt", "sampleFSM/minMachineDFA.txt");
+        if (areFilesEqual) {
+            System.out.println("Egyezik");
+        } else {
+            System.out.println("Nem egyezik");
+        }
 
     }
 

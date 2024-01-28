@@ -226,7 +226,7 @@ public class DFA {
 //    }
 
 
-    public void printDFA() {
+    public void printDFA(String fileName) {
 
         Integer c = 0;
         for (State state : partitionToDFA()) {
@@ -241,7 +241,7 @@ public class DFA {
             }
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("sampleFSM/minUserDFA.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write(c + "\n");
             writer.write("start " + this.getInitialState().getId());
             writer.newLine();

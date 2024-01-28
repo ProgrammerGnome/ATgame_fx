@@ -48,7 +48,9 @@ public class RandomPatternGen {
                         replace(":","*").
                         replace("$","+").
                         replace("/","").
-                        replace("?",randomChar);
+                        replace("?",randomChar).
+                        replace("[","+").
+                        replace("]","*");
                 System.out.println(sophisticaedLine);
             }
 

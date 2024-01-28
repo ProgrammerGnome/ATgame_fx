@@ -1,9 +1,9 @@
-REGULAR EXPRESSION: (aba)*a|b
-REGULAR EXPRESSION IN POSTFIX: ab.a.*a.b|
-SYMBOL LIST: [a, b]
-STATES ([PARTITION]=STATE ID): {[3, 4]=1, [1, 2, 5]=2, [0]=0}
+REGULAR EXPRESSION: a(y*a(y*a(y*bccb|abc)|ab|b)|lta)|4e453
+REGULAR EXPRESSION IN POSTFIX: ay*a.y*a.y*b.c.c.b.ab.c.|.ab.|b|.lt.a.|.4e.4.5.3.|
+SYMBOL LIST: [3, 4, 5, a, b, c, e, l, t, y]
+STATES ([PARTITION]=STATE ID): {[17, 18, 22, 24, 9, 14]=1, [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 15, 16, 19, 20, 21, 23]=0}
 TRANSITION TABLE ([STATE]={[SYMBOL]=[STATE]}) 
 WHERE STATE CORRESPONDS TO A STATE IN 'STATES': 
-{0={a=2, b=2}, 1={a=1}, 2={b=1}}
+{0={a=0, 4=0}, 1={}}
 INITIAL STATE: [0]
-FINAL STATES: [2]
+FINAL STATES: [1]

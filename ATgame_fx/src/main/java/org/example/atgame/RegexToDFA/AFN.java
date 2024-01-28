@@ -328,8 +328,8 @@ public class AFN {
         return this.initialState;
     }
 
-    public String getPostFixRegExp() {
-        return this.postFixRegExp;
-    }
+//    public String getPostFixRegExp() {
+//        return this.postFixRegExp;
+//    }
 
 }

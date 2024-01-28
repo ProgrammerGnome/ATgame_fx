@@ -6,15 +6,13 @@ import java.util.*;
 public class TransitionConverter {
 
     public static void main(String[] args) {
-        try {
-            convertFile("sampleFSM/UserAutomata.txt", "sampleFSM/ConvertedUserAutomata.txt");
-            System.out.println("Conversion completed successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            convertFile("sampleFSM/UserAutomata.txt", "sampleFSM/ConvertedUserAutomata.txt");
+//            System.out.println("Conversion completed successfully.");
+//        } catch (IOException ignored) {}
     }
 
-    private static void convertFile(String inputFile, String outputFile) throws IOException {
+    public void convertFile(String inputFile, String outputFile) throws IOException {
         List<String> lines = readLinesFromFile(inputFile);
 
         List<String> transitions = getTransitions(lines);
