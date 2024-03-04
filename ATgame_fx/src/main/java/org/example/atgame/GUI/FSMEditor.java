@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 import org.example.atgame.DFAMinimization.MainMini;
 import org.example.atgame.GlueComponents.FileComparator;
 import org.example.atgame.GlueComponents.TransitionConverter;
-import org.example.atgame.NFAtoDFA.NFA_to_DFA;
 import org.example.atgame.RegexToDFA.UserNFAtoDFA;
 
 import java.io.BufferedWriter;
@@ -196,6 +195,8 @@ public class FSMEditor {
             e.printStackTrace();
             showAlert("Error exporting FSM", "Error");
         }
+
+        // TODO: Teljes átdolgozásra vár.
 
         /*
           Egyéb (játékos) függvényhívások

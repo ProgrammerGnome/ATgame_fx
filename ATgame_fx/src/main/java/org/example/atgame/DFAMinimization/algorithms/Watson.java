@@ -66,7 +66,7 @@ public class Watson extends Algorithm{
             for(int j = i+1; j<dfa.partitionToDFA().length; j++){
                 if(i<j){
                     S = new HashMap<State, State>();
-                    if(equiv(dfa.getStateById(i), dfa.getStateById(j), k)==true){
+                    if(equiv(dfa.getStateById(i), dfa.getStateById(j), k)){
                         System.out.println("Equiv("+dfa.getStateById(i).getId()+","+dfa.getStateById(j).getId()+") = "+true);
                         boolean added=false;
                         for(Set<State> set : results){
@@ -76,7 +76,7 @@ public class Watson extends Algorithm{
                                 break;
                             }
                         }
-                        if(added == false){
+                        if(!added){
                             HashSet<State> hs= new HashSet<State>();
                             hs.add(dfa.getStateById(i));
                             hs.add(dfa.getStateById(j));

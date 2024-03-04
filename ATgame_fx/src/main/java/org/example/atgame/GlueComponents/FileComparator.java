@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class FileComparator {
 
-    public /*static*/ boolean compareFiles(String filePath1, String filePath2) {
+    public boolean compareFiles(String filePath1, String filePath2) {
         try (BufferedReader reader1 = new BufferedReader(new FileReader(filePath1));
              BufferedReader reader2 = new BufferedReader(new FileReader(filePath2))) {
 
@@ -28,16 +28,4 @@ public class FileComparator {
         }
     }
 
-//    public static void main(String[] args) {
-//        String filePath1 = "output.txt";
-//        String filePath2 = "output2.txt";
-//
-//        boolean areFilesEqual = compareFiles(filePath1, filePath2);
-//
-//        if (areFilesEqual) {
-//            System.out.println("A két fájl tartalma azonos.");
-//        } else {
-//            System.out.println("A két fájl tartalma különbözik.");
-//        }
-//    }
 }

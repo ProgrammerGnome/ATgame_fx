@@ -5,13 +5,6 @@ import java.util.*;
 
 public class TransitionConverter {
 
-    public static void main(String[] args) {
-//        try {
-//            convertFile("sampleFSM/UserAutomata.txt", "sampleFSM/ConvertedUserAutomata.txt");
-//            System.out.println("Conversion completed successfully.");
-//        } catch (IOException ignored) {}
-    }
-
     public void convertFile(String inputFile, String outputFile) throws IOException {
         List<String> lines = readLinesFromFile(inputFile);
 
@@ -42,12 +35,12 @@ public class TransitionConverter {
     }
 
     private static Set<String> getInitialState(List<String> lines) {
-        String initialState = lines.get(1).replace("INITIAL STATE: [", "").replace("]", "").replace("q","");
+        String initialState = lines.get(1).replace("INITIAL STATE: [", "").replace("]", "").replace("q", "");
         return Collections.singleton(initialState);
     }
 
     private static Set<String> getFinalStates(List<String> lines) {
-        String finalStatesList = lines.get(2).replace("FINAL STATE(S): [", "").replace("]", "").replace("q","");
+        String finalStatesList = lines.get(2).replace("FINAL STATE(S): [", "").replace("]", "").replace("q", "");
         return new HashSet<>(Arrays.asList(finalStatesList.split(", ")));
     }
 
@@ -74,7 +67,7 @@ public class TransitionConverter {
     private static void writeLinesToFile_v2(String filename, List<String> lines) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
             for (String line : lines) {
-                writer.write(line+" ");
+                writer.write(line + " ");
             }
         }
     }

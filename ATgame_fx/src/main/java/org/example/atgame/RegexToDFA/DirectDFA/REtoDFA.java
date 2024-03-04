@@ -2,9 +2,6 @@ package org.example.atgame.RegexToDFA.DirectDFA;
 
 import java.util.*;
 
-/**
- * Created by Gabriel Brolo on 08/08/2017.
- */
 public class REtoDFA {
     private String postfixRegexp;
     private List<Node> nodeList;
@@ -53,7 +50,7 @@ public class REtoDFA {
         for (int i = 0; i < followposTable.size(); i++) {
             if (!followposTable.isEmpty()) {
                 if (followposTable.get(i) != null) {
-                    if (!stateMap.containsValue(followposTable.get(i))){
+                    if (!stateMap.containsValue(followposTable.get(i))) {
                         stateMap.put(stateIDCount, followposTable.get(i));
                         stateMapBck.put(followposTable.get(i), stateIDCount);
                         stateIDCount++;
@@ -204,7 +201,9 @@ public class REtoDFA {
                 }
             }
 
-            if (stop) { i = nodeList.size(); } // stop computing followpos if reached final pos
+            if (stop) {
+                i = nodeList.size();
+            } // stop computing followpos if reached final pos
 
         }
 
@@ -243,7 +242,9 @@ public class REtoDFA {
                         symbolList.add(currSymbol); // add symbol to symbolList
                     }
 
-                    if (currSymbol.equals("#")) { tmpNode.setLast(true); }
+                    if (currSymbol.equals("#")) {
+                        tmpNode.setLast(true);
+                    }
                     pos++; // add 1 to pos
                     // add to list and stack
                     nodeList.add(tmpNode);
@@ -333,11 +334,28 @@ public class REtoDFA {
         }
     }
 
-    public List<String> getSymbolList() { return this.symbolList; }
-    public List<Integer> getFinalStates() { return this.finalStates; }
-    public List<Integer> getInitialState() { return this.initialState; }
-    public HashMap<Integer, String> getStateSymbol() { return this.stateSymbol; }
-    public HashMap<Integer, List<Integer>> getStateMap() { return this.stateMap; }
-    public HashMap<Integer, HashMap<String, Integer>> getTransitionTable() { return this.transitionTable; }
+    public List<String> getSymbolList() {
+        return this.symbolList;
+    }
+
+    public List<Integer> getFinalStates() {
+        return this.finalStates;
+    }
+
+    public List<Integer> getInitialState() {
+        return this.initialState;
+    }
+
+    public HashMap<Integer, String> getStateSymbol() {
+        return this.stateSymbol;
+    }
+
+    public HashMap<Integer, List<Integer>> getStateMap() {
+        return this.stateMap;
+    }
+
+    public HashMap<Integer, HashMap<String, Integer>> getTransitionTable() {
+        return this.transitionTable;
+    }
 
 }

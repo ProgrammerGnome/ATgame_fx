@@ -7,7 +7,6 @@ import java.util.List;
  * State.
  * A state in the AFN.
  * Speaking in Graph terms it would be a Vertex v.
- * Created by Gabriel Brolo on 22/07/2017.
  */
 public class State {
     private List<State> previousStates;

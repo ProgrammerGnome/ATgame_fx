@@ -2,9 +2,6 @@ package org.example.atgame.RegexToDFA.DirectDFA;
 
 import java.util.List;
 
-/**
- * Created by Gabriel Brolo on 08/08/2017.
- */
 public class Node {
 
     private boolean isPosition;

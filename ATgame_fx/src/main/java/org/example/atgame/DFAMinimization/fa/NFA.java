@@ -1,6 +1,7 @@
 package org.example.atgame.DFAMinimization.fa;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class NFA {
     private State[] nfa;

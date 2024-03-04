@@ -67,15 +67,4 @@ public class State {
         return s;
     }
 
-    public Alias getAlias() {
-        return alias;
-    }
-
-    public void setTransitionsTo(Map<String, Set<Integer>> transitionsTo) {
-        this.transitionsTo = transitionsTo;
-    }
-
-    public void setTransitionsFrom(Map<String, Set<Integer>> transitionsFrom) {
-        this.transitionsFrom = transitionsFrom;
-    }
 }

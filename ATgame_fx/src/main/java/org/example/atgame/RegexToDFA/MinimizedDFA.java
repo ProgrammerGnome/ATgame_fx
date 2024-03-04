@@ -1,11 +1,7 @@
 package org.example.atgame.RegexToDFA;
 
-
 import java.util.*;
 
-/**
- * Created by Gabriel Brolo on 04/08/2017.
- */
 public class MinimizedDFA {
     private DFA dfa;
     private List<List<State>> dfaStates;
@@ -24,7 +20,7 @@ public class MinimizedDFA {
 
     private boolean equivalent;
 
-    public MinimizedDFA (DFA dfa) {
+    public MinimizedDFA(DFA dfa) {
         this.dfa = dfa;
 
         dfaStates = this.dfa.getDfaStates();
@@ -52,7 +48,11 @@ public class MinimizedDFA {
 
         for (List<State> currentState : dfaStates) {
             int stateID = dfaStatesWithNumbering.get(currentState);
-            if (dfaFinalStates.contains(stateID)) { F.add(stateID); } else { SMinusF.add(stateID); }
+            if (dfaFinalStates.contains(stateID)) {
+                F.add(stateID);
+            } else {
+                SMinusF.add(stateID);
+            }
         }
 
         // add initial partitions to PiSet
@@ -79,8 +79,12 @@ public class MinimizedDFA {
         for (List<Integer> set : PiSet) {
             for (int state : set) {
                 if (dfaFinalStates.contains(state) &&
-                        (!finalStates.contains(minimizedDFAStates.get(set)))) { finalStates.add(minimizedDFAStates.get(set)); }
-                if (dfaInitialStates.contains(state)) { initialStates.add(minimizedDFAStates.get(set)); }
+                        (!finalStates.contains(minimizedDFAStates.get(set)))) {
+                    finalStates.add(minimizedDFAStates.get(set));
+                }
+                if (dfaInitialStates.contains(state)) {
+                    initialStates.add(minimizedDFAStates.get(set));
+                }
             }
         }
 
@@ -125,31 +129,42 @@ public class MinimizedDFA {
 
                             for (Transition tr : dfaTransitionList) {
                                 if ((tr.getInitialState().getStateId() == p)
-                                        && (tr.getTransitionSymbol().equals(A))) { pA = tr.getFinalState().getStateId(); }
+                                        && (tr.getTransitionSymbol().equals(A))) {
+                                    pA = tr.getFinalState().getStateId();
+                                }
                                 if ((tr.getInitialState().getStateId() == q)
-                                        && (tr.getTransitionSymbol().equals(A))) { qA = tr.getFinalState().getStateId(); }
+                                        && (tr.getTransitionSymbol().equals(A))) {
+                                    qA = tr.getFinalState().getStateId();
+                                }
                             }
 
                             // check if pA and qA belong to the same set
                             for (List<Integer> SA : partition) {
                                 if ((SA.contains(pA)) && (SA.contains(qA))) {
                                     equivCount++;
-                                } else if ((pA == -1) && (qA == -1)) { equivCount++; }
+                                } else if ((pA == -1) && (qA == -1)) {
+                                    equivCount++;
+                                }
                             }
                         }
-                        if (equivCount >= dfaSymbolList.size()) { tmpP.add(q); }
+                        if (equivCount >= dfaSymbolList.size()) {
+                            tmpP.add(q);
+                        }
                     }
                 }
-                Set<Integer> set = new HashSet<>();
-                set.addAll(tmpP);
+                Set<Integer> set = new HashSet<>(tmpP);
                 tmpP.clear();
                 tmpP.addAll(set);
-                if (!partitionNew.contains(tmpP) && (tmpP.size() > 0)) { partitionNew.add(tmpP); }
+                if (!partitionNew.contains(tmpP) && (!tmpP.isEmpty())) {
+                    partitionNew.add(tmpP);
+                }
             }
             int count = 0;
             for (int tmp1 : S) {
                 for (List<Integer> tmp : partitionNew) {
-                    if (tmp.contains(tmp1)) { count++; }
+                    if (tmp.contains(tmp1)) {
+                        count++;
+                    }
                 }
                 if (count == 0) {
                     List<Integer> list = new LinkedList<>();
@@ -161,10 +176,24 @@ public class MinimizedDFA {
 
         return partitionNew;
     }
-    
-    public List<List<Integer>> getPiSet() { return this.PiSet; }
-    public HashMap<Integer, HashMap<String, Integer>> getMinimizedDFATable () { return this.minimizedDFATable; }
-    public HashMap<List<Integer>, Integer> getPartitionIDs () { return this.minimizedDFAStates; }
-    public List<Integer> getFinalStates () { return this.finalStates; }
-    public List<Integer> getInitialStates () { return this.initialStates; }
+
+    public List<List<Integer>> getPiSet() {
+        return this.PiSet;
+    }
+
+    public HashMap<Integer, HashMap<String, Integer>> getMinimizedDFATable() {
+        return this.minimizedDFATable;
+    }
+
+    public HashMap<List<Integer>, Integer> getPartitionIDs() {
+        return this.minimizedDFAStates;
+    }
+
+    public List<Integer> getFinalStates() {
+        return this.finalStates;
+    }
+
+    public List<Integer> getInitialStates() {
+        return this.initialStates;
+    }
 }

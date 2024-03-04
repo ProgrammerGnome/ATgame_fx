@@ -7,7 +7,6 @@ import java.util.List;
 /**
  * Transformation
  * Transforms an NFA to a DFA.
- * Created by Gabriel Brolo on 27/07/2017.
  */
 public class Transformation {
     private List<Transition> transitionList; // Transition List coming from AFN

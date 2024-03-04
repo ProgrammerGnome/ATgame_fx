@@ -1,10 +1,6 @@
-package Syntax;
+package org.example.atgame.RegexToDFA.Syntax;
 
 import java.util.*;
-
-/**
- * Credit: https://gist.github.com/gmenard/6161825
- * */
 
 public class PostFix {
 

@@ -7,7 +7,6 @@ import java.util.List;
 /**
  * DFA
  * A DFA generated from a NFA via subsets of the NFA.
- * Created by Gabriel Brolo on 28/07/2017.
  */
 public class DFA {
     private HashMap<List<State>, HashMap<String, List<State>>> dfaTable; // table with transitions
@@ -51,7 +50,7 @@ public class DFA {
                     if (transitionsList.get(j).getTransitionSymbol().equals(currChar)) {
                         currentState = transitionsList.get(j).getFinalState().getStateId();
                         j = transitionsList.size();
-                    } else if ((transitionsList.get(j).getInitialState().getNextStates().size() == 0)) {
+                    } else if ((transitionsList.get(j).getInitialState().getNextStates().isEmpty())) {
                         currentState = -1;
                     }
                 }
@@ -87,7 +86,7 @@ public class DFA {
                 String currSymbol = Character.toString(symbolList.get(j));
                 List<State> currStateListSymbolList  = currStateListInfo.get(currSymbol);
 
-                if (currStateListSymbolList.size() > 0) {
+                if (!currStateListSymbolList.isEmpty()) {
                     State finalState = new State(dfaStatesWithNumbering.get(currStateListSymbolList), true);
                     Transition tmpTransition = new Transition(currSymbol, initialState, finalState);
 

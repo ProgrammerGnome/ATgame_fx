@@ -4,7 +4,6 @@ import org.example.atgame.DFAMinimization.algorithms.Watson;
 import org.example.atgame.DFAMinimization.fa.DFA;
 import org.example.atgame.DFAMinimization.fa.DfaReader;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class MainMini {
@@ -33,7 +32,7 @@ public class MainMini {
 //        }
     }
 
-    public /*static*/ void menu2(String inputFile, String outputFile) {
+    public void menu2(String inputFile, String outputFile) {
         DfaReader dfaReader = new DfaReader();
         dfaReader.readDFA_main(inputFile,outputFile);
         DFA dfa = dfaReader.getDfa();
@@ -96,7 +95,7 @@ public class MainMini {
 //        return false;
 //    }
 
-//    public /*static*/ boolean useAnotherAlgorithm() {
+//    public boolean useAnotherAlgorithm() {
 //        char c = 'e';
 //        Scanner scanner = new Scanner(System.in);
 //        System.out.println("Would you like to try another algorithm for this dfa? \n[Y/y] - yes \n[N/n] - no  ");
@@ -109,7 +108,7 @@ public class MainMini {
 //        return c != 'n' && c != 'N';
 //    }
 
-    public /*static*/ void minimization(int option, DFA dfa, String outputFile) {
+    public void minimization(int option, DFA dfa, String outputFile) {
         DFA copy = dfa.copy();
         System.out.println("original DFA");
         dfa.printDFA(outputFile);
@@ -124,7 +123,7 @@ public class MainMini {
 //        }
     }
 
-    public /*static*/ int option() {
+    public int option() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("choose the algorithm:\n1)Watson");
         //String line = scanner.nextLine();

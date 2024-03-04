@@ -1,7 +1,12 @@
 package org.example.atgame.NFAtoDFA;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 public class Main {
 
@@ -53,28 +58,5 @@ public class Main {
         }
 
     }
-
-
-
-
-//    public static void main(String[] args) throws IOException {
-//
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("1 - NFA to DFA");
-//        System.out.println("2 - Minimize DFA");
-//
-//        int choice = sc.nextInt();
-//
-//        if (choice == 1) {
-//            NFA_to_DFA.nfa_to_dfa();
-//        } else {
-//            DFA_Minimizer.minimize();
-//        }
-//
-//    }
-
-
-
-
 
 }

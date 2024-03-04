@@ -1,7 +1,7 @@
 package org.example.atgame.RegexToDFA;
 
-import Syntax.ExpressionSimplifier;
-import Syntax.PostFix;
+import org.example.atgame.RegexToDFA.Syntax.ExpressionSimplifier;
+import org.example.atgame.RegexToDFA.Syntax.PostFix;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -12,7 +12,6 @@ import java.util.Stack;
  * AFN
  * An AFN constructed from a regExp using McNaughton-Yamada-Thompson's algorithm.
  * Output @AFN.txt: a txt file with the contents of the AFN.
- * Created by Gabriel Brolo on 22/07/2017.
  */
 public class AFN {
     private PostFix postFix; // to handle infix to postfix

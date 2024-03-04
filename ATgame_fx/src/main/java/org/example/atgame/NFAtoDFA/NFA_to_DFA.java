@@ -1,6 +1,8 @@
 package org.example.atgame.NFAtoDFA;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,19 +20,11 @@ public class NFA_to_DFA {
 
         //take all the inputs from file "nfa"
         Main.input(inputFilePath);
-        start=Main.start;
-        inputSymbols=Main.inputSymbols;
-        dfa=Main.dfa;
-        final_states=Main.final_states;
-        non_final_states=Main.non_final_states;
-
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                //draw NFA from file "nfa"
-//                new com.graphics.MainFrame("nfa", "NFA");
-//            }
-//        }).start();
+        start = Main.start;
+        inputSymbols = Main.inputSymbols;
+        dfa = Main.dfa;
+        final_states = Main.final_states;
+        non_final_states = Main.non_final_states;
 
         //store the output dfa as it is stored in the file
         String output = "";
@@ -99,7 +93,7 @@ public class NFA_to_DFA {
         }
 
         output = idx + "\n" + output;
-        output = output + fstate+"\n";
+        output = output + fstate + "\n";
 
         System.out.println(output);
 
@@ -117,14 +111,14 @@ public class NFA_to_DFA {
             // Ellenőrizni, hogy van-e legalább egy sor
             if (!lines.isEmpty()) {
                 // Az első sor tartalmának módosítása (például növelése eggyel)
-                int newValue = lines.size()-5;
-                String finalValue = lines.get(lines.size()-3) + " ";
+                int newValue = lines.size() - 5;
+                String finalValue = lines.get(lines.size() - 3) + " ";
 
                 // Az új érték visszaírása az első sorba
                 lines.set(0, Integer.toString(newValue));
-                lines.set(lines.size()-3, finalValue);
-                lines.remove(lines.size()-1);
-                lines.remove(lines.size()-2);
+                lines.set(lines.size() - 3, finalValue);
+                lines.remove(lines.size() - 1);
+                lines.remove(lines.size() - 2);
 
                 // Fájl újratöltése az elérési útvonal alapján
                 Files.write(Paths.get(outFileName), lines, StandardCharsets.UTF_8);
@@ -134,11 +128,6 @@ public class NFA_to_DFA {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-//        //draw DFA from file "dfa"
-//        new com.graphics.MainFrame("dfa", "DFA");
-
-
 
     }
 

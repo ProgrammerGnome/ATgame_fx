@@ -1,9 +1,8 @@
-package Syntax;
+package org.example.atgame.RegexToDFA.Syntax;
 
 /**
  * Expression Simplifier
  * Checks for '+' and '?' operators inside a regexp. If true, replaces them in terms of '*' and '|ε'.
- * Created by Gabriel Brolo on 23/07/2017.
  */
 public class ExpressionSimplifier {
     private String regExp; // the regexp
@@ -134,4 +133,5 @@ public class ExpressionSimplifier {
             }
         }
     }
+
 }

@@ -191,41 +191,6 @@ public class DFA {
         return !checked.containsAll(Arrays.asList(dfa));
     }
 
-//    public void printDFA(){
-//        System.out.println("initial state: "+this.getInitialState().getId());
-//        String finalStates = "final states: ";
-//        String nonFinalStates = "nonfinal states: ";
-//        for(int i = 0; i< partitionToDFA().length; i++){
-//            if(getFinalStates().contains(partitionToDFA()[i])){
-//                finalStates += partitionToDFA()[i].getId()+", ";
-//            }
-//            else{
-//                nonFinalStates += partitionToDFA()[i].getId()+", ";
-//            }
-//        }
-//        System.out.println(finalStates.substring(0,finalStates.length()-2));
-//        System.out.println(nonFinalStates.substring(0,nonFinalStates.length()-2));
-//        for(State state : partitionToDFA()){
-//            if(state.getAlias().isEnabled() == true){
-//                System.out.println("id "+state.getId()+"   "+state.getAlias().getName());
-//            }
-//            else{
-//                System.out.println("id "+state.getId());
-//            }
-//            for(String s : getAlphabet()){
-//                if(state.getTransitionsTo().containsKey(s)){
-//                   String output = "  transition on: "+ s +"  to: ";
-//                   for(Integer i : state.getTransitionsTo().get(s)){
-//                       output += partitionToDFA()[i].getId() + ", ";
-//                   }
-//                    System.out.println(output.substring(0, output.length()-2));
-//                }
-//            }
-//        }
-//        System.out.println("\n\n");
-//    }
-
-
     public void printDFA(String fileName) {
 
         Integer c = 0;
