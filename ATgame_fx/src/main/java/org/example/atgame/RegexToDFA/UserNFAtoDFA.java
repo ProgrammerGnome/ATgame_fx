@@ -2,6 +2,8 @@ package org.example.atgame.RegexToDFA;
 
 //import org.example.atgame.RegexToDFA.*;
 
+import org.example.atgame.GlueComponents.RandomPatternGen;
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -13,7 +15,7 @@ public class UserNFAtoDFA {
 
     public void writeFile() {
 
-        regexp = "(aba)*a|b";
+        //regexp = "(aba)*.a|b";
         // (aba)*a|b
 
         /*
@@ -21,6 +23,11 @@ public class UserNFAtoDFA {
                Use any symbol rather than '|', '*', '+', '?', '^', '.'
                You MUST use ε in your expression for representation of an empty word. (Just copy it from here)
          */
+
+        // TODO: normál regexet kell átadni
+        RandomPatternGen randomPatternGen = new RandomPatternGen();
+        regexp = randomPatternGen.main();
+
         afn = new AFN(regexp);
 
         try {

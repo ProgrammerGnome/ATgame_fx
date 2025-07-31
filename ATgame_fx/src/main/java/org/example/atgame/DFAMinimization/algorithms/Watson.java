@@ -54,7 +54,7 @@ public class Watson extends Algorithm{
             }
             int id1 = (p.getTransitionsTo().get(key).iterator().next());
             int id2 = (q.getTransitionsTo().get(key).iterator().next());
-            eq = eq && equiv(this.dfa.getStateById(id1),this.dfa.getStateById(id2),k-1);
+            eq = equiv(this.dfa.getStateById(id1),this.dfa.getStateById(id2),k-1);
         }
         S.remove(p);
         return eq;
@@ -93,16 +93,16 @@ public class Watson extends Algorithm{
     }
 
     public String output(){
-        String string = "Equivalent states are: ";
+        StringBuilder string = new StringBuilder("Equivalent states are: ");
         for(Set<State> set : results){
-            String temp = "";
+            StringBuilder temp = new StringBuilder();
             for(State state : set){
-                temp += state.getId()+", ";
+                temp.append(state.getId()).append(", ");
             }
-            string += "\n "+temp.substring(0, temp.length()-2);
+            string.append("\n ").append(temp.substring(0, temp.length() - 2));
         }
-        string = "\n"+string+"\n";
-        return string;
+        string = new StringBuilder("\n" + string + "\n");
+        return string.toString();
     }
 
     public DFA toDFA(){
@@ -124,7 +124,7 @@ public class Watson extends Algorithm{
                 id++;
             }
         }
-        dfa2.setDfa(list.toArray(new State[list.size()]));
+        dfa2.setDfa(list.toArray(new State[0]));
         dfa2.setAlphabet(this.dfa.getAlphabet());
         dfa2.setInitialState(dfa2.getStateById(dictionary.get(dfa.getInitialState())));
         for(State state : this.dfa.partitionToDFA()){

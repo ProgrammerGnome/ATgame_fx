@@ -188,57 +188,121 @@ public class AFN {
      * The real deal.
      * Parses the expression to an AFN.
      */
+//    private void regExpToAFN() {
+//        // valid expression stored at postFixRegExp
+//        // new transition for first symbol
+//        // from here, every symbol has a Transition that represents it
+//
+//        // Traverse the rest of the expression
+//        for (int i = 0; i < postFixRegExp.length(); i++) {
+//            // if character at i is in symbolList
+//            if (symbolList.contains(postFixRegExp.charAt(i))) {
+//                Transition tr1 = new Transition(Character.toString(postFixRegExp.charAt(i)));
+//                transitionsList.add(tr1);
+//
+//                State initialState = tr1.getInitialState();
+//                State finalState = tr1.getFinalState();
+//
+//                stackInitial.push(initialState);
+//                stackFinal.push(finalState);
+//            } else if (Character.toString(postFixRegExp.charAt(i)).equals("|")) {
+//                // if char is OR
+//                State lowerInitial = stackInitial.pop();
+//                State lowerFinal = stackFinal.pop();
+//                State upperInitial = stackInitial.pop();
+//                State upperFinal = stackFinal.pop();
+//
+//                unify(upperInitial, upperFinal, lowerInitial, lowerFinal);
+//            } else if (Character.toString(postFixRegExp.charAt(i)).equals("*")) {
+//                //if char is kleene
+//                State initialState = stackInitial.pop();
+//                State finalState = stackFinal.pop();
+//
+//                kleene(initialState, finalState);
+//            } else if (Character.toString(postFixRegExp.charAt(i)).equals(".")) {
+//                // if char is concatenation
+//                saveFinal = stackFinal.pop();
+//                System.out.println(stackFinal);
+//                State finalState = stackFinal.pop();
+//                State initialState = stackInitial.pop();
+//
+//                concatenate(finalState, initialState);
+//            }
+//
+//            if (i == postFixRegExp.length() - 1) {
+//                State finalState = stackFinal.pop();
+//                finalState.setFinal(true);
+//                stackFinal.push(finalState);
+//                finalStates.add(stackFinal.pop());
+//                if (symbolList.contains('ε')) {
+//                    symbolList.remove(symbolList.indexOf('ε'));
+//                }
+//            }
+//        }
+//    }
     private void regExpToAFN() {
-        // valid expression stored at postFixRegExp
-        // new transition for first symbol
-        // from here, every symbol has a Transition that represents it
-
-        // Traverse the rest of the expression
+        System.out.println("A szimbólum: "+postFixRegExp);
         for (int i = 0; i < postFixRegExp.length(); i++) {
-            // if character at i is in symbolList
-            if (symbolList.contains(postFixRegExp.charAt(i))) {
-                Transition tr1 = new Transition(Character.toString(postFixRegExp.charAt(i)));
+            char c = postFixRegExp.charAt(i);
+            String symbol = Character.toString(c);
+
+            if (symbolList.contains(c)) {
+                Transition tr1 = new Transition(symbol);
                 transitionsList.add(tr1);
+                stackInitial.push(tr1.getInitialState());
+                stackFinal.push(tr1.getFinalState());
 
-                State initialState = tr1.getInitialState();
-                State finalState = tr1.getFinalState();
+            } else if (symbol.equals("|")) {
+                if (stackInitial.size() < 2 || stackFinal.size() < 2) {
+                    throw new IllegalStateException("Hibás postfix regex: nincs elég operandus az '|' művelethez.");
+                }
 
-                stackInitial.push(initialState);
-                stackFinal.push(finalState);
-            } else if (Character.toString(postFixRegExp.charAt(i)).equals("|")) {
-                // if char is OR
                 State lowerInitial = stackInitial.pop();
                 State lowerFinal = stackFinal.pop();
                 State upperInitial = stackInitial.pop();
                 State upperFinal = stackFinal.pop();
 
                 unify(upperInitial, upperFinal, lowerInitial, lowerFinal);
-            } else if (Character.toString(postFixRegExp.charAt(i)).equals("*")) {
-                //if char is kleene
+
+            } else if (symbol.equals("*")) {
+                if (stackInitial.isEmpty() || stackFinal.isEmpty()) {
+                    throw new IllegalStateException("Hibás postfix regex: nincs elég operandus a '*' művelethez.");
+                }
+
                 State initialState = stackInitial.pop();
                 State finalState = stackFinal.pop();
 
                 kleene(initialState, finalState);
-            } else if (Character.toString(postFixRegExp.charAt(i)).equals(".")) {
-                // if char is concatenation
+
+            } else if (symbol.equals(".")) {
+                if (stackInitial.isEmpty() || stackFinal.size() < 2) {
+                    throw new IllegalStateException("Hibás postfix regex: nincs elég operandus a '.' művelethez.");
+                }
+
                 saveFinal = stackFinal.pop();
                 State finalState = stackFinal.pop();
                 State initialState = stackInitial.pop();
 
                 concatenate(finalState, initialState);
-            }
 
-            if (i == postFixRegExp.length() - 1) {
-                State finalState = stackFinal.pop();
-                finalState.setFinal(true);
-                stackFinal.push(finalState);
-                finalStates.add(stackFinal.pop());
-                if (symbolList.contains('ε')) {
-                    symbolList.remove(symbolList.indexOf('ε'));
-                }
+            } else {
+                throw new IllegalArgumentException("Ismeretlen szimbólum a postfix regexben: '" + symbol + "'");
             }
         }
+
+        // Végállapot beállítása
+        if (!stackFinal.isEmpty()) {
+            State finalState = stackFinal.pop();
+            finalState.setFinal(true);
+            finalStates.add(finalState);
+        } else {
+            throw new IllegalStateException("Hiányzik a végállapot a regex feldolgozása után.");
+        }
+
+        // ε eltávolítása, ha benne van
+        symbolList.removeIf(ch -> ch == 'ε');
     }
+
 
     /**
      * Union | in Thompson's algorithm

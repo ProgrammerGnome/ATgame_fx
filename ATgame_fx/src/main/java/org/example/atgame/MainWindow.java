@@ -1,11 +1,24 @@
 package org.example.atgame;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.example.atgame.GUI.RandomStringWindow;
+
+
+import javafx.scene.control.Label;
+import org.example.atgame.GlueComponents.RandomStringGenerator;
+
+import java.io.IOException;
+
+import static javafx.application.Application.launch;
 
 public class MainWindow extends Application {
 
@@ -60,7 +73,59 @@ public class MainWindow extends Application {
                 System.out.println("harmadik gomb")
                 // TODO: megvalósításra vár...
         );
+
+
+
+
+        Scene scene1 = createScene1();
+        Scene scene2 = createScene2();
+
+        // Hozz létre egy fő VBox-ot a két Scene kombinálásához
+        HBox root = new HBox();
+        root.getChildren().addAll(scene1.getRoot(), scene2.getRoot());
+
+        // Állítsd be az új Scene-t a fő Stage-ben
+        primaryStage.setScene(new Scene(root, 1050, 650));
+        primaryStage.setTitle("Combined Scenes");
+        primaryStage.show();
     }
+
+    private Scene createScene1() {
+
+        HBox content = new HBox();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+//            throw new RuntimeException(e);
+        }
+        content.getChildren().add(root);
+
+        return new Scene(content, 300, 200);
+    }
+
+    private Scene createScene2() {
+        HBox content = new HBox();
+
+        RandomStringGenerator randomStringGenerator = new RandomStringGenerator();
+
+        // Tömb tartalmának ObservableList-be helyezése (JavaFX adatstruktúra)
+        ObservableList<String> observableList = FXCollections.observableArrayList(randomStringGenerator.main());
+
+        // ListView létrehozása és az ObservableList hozzáadása
+        ListView<String> listView = new ListView<>(observableList);
+
+        // JavaFX felület összeállítása
+        StackPane root = new StackPane();
+        root.getChildren().add(listView);
+
+        // JavaFX ablak konfigurálása
+        content.getChildren().add(root);
+        return new Scene(content, 300, 200);
+    }
+
 
     public static void main(String[] args) {
         launch(args);

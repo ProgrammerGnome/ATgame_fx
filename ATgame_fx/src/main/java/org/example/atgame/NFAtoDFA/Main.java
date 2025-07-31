@@ -12,7 +12,7 @@ public class Main {
 
     static int start; //stores the id of the start state
     static Set<String> inputSymbols; // stores the set of input symbols
-    static State dfa[]; //stores all the states data
+    static State[] dfa; //stores all the states data
     static Group final_states; //group of final states
     static Group non_final_states; //group of non-final states
 
@@ -24,6 +24,7 @@ public class Main {
             e.printStackTrace();
         }
 
+        assert scan != null;
         int n = Integer.parseInt(scan.readLine());
         dfa = new State[n];
         for (int i = 0; i < n; i++) {

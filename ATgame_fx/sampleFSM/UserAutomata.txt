@@ -1,3 +1,3 @@
-TRANSITIONS LIST: [q0 - a - q1, q1 - b - q2, q2 - a - q0, q0 - b - q3]
-INITIAL STATE: [q0]
-FINAL STATE(S): [q1, q3]
+TRANSITIONS LIST: [q1 - a - q0, q0 - b - q3, q3 - a - q4, q4 - a - q0, q1 - b - q2]
+INITIAL STATE: [q1]
+FINAL STATE(S): [q2, q0]

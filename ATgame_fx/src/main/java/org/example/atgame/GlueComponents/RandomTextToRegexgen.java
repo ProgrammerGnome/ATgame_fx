@@ -15,12 +15,17 @@ public class RandomTextToRegexgen {
         randomStrings.add("a");
         randomStrings.add("ab");
         randomStrings.add("abb");
+        randomStrings.add("bab");
+        randomStrings.add("baa");
+
+        /*
         randomStrings.add("cca");
         randomStrings.add("add");
         randomStrings.add("eea");
         randomStrings.add("aecd");
         randomStrings.add("abee");
-        randomStrings.add("baa");
+        randomStrings.add("ea");
+        randomStrings.add("bad");
         randomStrings.add("eeb");
         randomStrings.add("adbe");
         randomStrings.add("abba");
@@ -28,10 +33,8 @@ public class RandomTextToRegexgen {
         randomStrings.add("dada");
         randomStrings.add("ebbe");
         randomStrings.add("cacb");
-        randomStrings.add("bab");
-        randomStrings.add("ea");
-        randomStrings.add("bad");
         randomStrings.add("dda");
+        */
 
         Collections.shuffle(randomStrings, new Random());
         List<String> selectedItems = randomStrings.subList(0, 2);

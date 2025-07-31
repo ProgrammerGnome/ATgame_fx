@@ -33,27 +33,50 @@ public class PostFix {
      * Transform regular expression by inserting a '.' as explicit concatenation
      * operator.
      */
+//    private static String formatRegEx(String regex) {
+//        String res = new String();
+//        List<Character> allOperators = Arrays.asList('|', '?', '+', '*', '^');
+//        List<Character> binaryOperators = Arrays.asList('^', '|');
+//
+//        for (int i = 0; i < regex.length(); i++) {
+//            Character c1 = regex.charAt(i);
+//
+//            if (i + 1 < regex.length()) {
+//                Character c2 = regex.charAt(i + 1);
+//
+//                res += c1;
+//
+//                if (!c1.equals('(') && !c2.equals(')') && !allOperators.contains(c2) && !binaryOperators.contains(c1)) {
+//                    res += '.';
+//                }
+//            }
+//        }
+//        res += regex.charAt(regex.length() - 1);
+//
+//        return res;
+//    }
     private static String formatRegEx(String regex) {
-        String res = new String();
-        List<Character> allOperators = Arrays.asList('|', '?', '+', '*', '^');
-        List<Character> binaryOperators = Arrays.asList('^', '|');
+        StringBuilder res = new StringBuilder();
+        //List<Character> allOperators = Arrays.asList('|', '?', '+', '*', '^');
+        //List<Character> binaryOperators = Arrays.asList('^', '|');
 
-        for (int i = 0; i < regex.length(); i++) {
-            Character c1 = regex.charAt(i);
+        for (int i = 0; i < regex.length() - 1; i++) {
+            char c1 = regex.charAt(i);
+            char c2 = regex.charAt(i + 1);
 
-            if (i + 1 < regex.length()) {
-                Character c2 = regex.charAt(i + 1);
+            res.append(c1);
 
-                res += c1;
-
-                if (!c1.equals('(') && !c2.equals(')') && !allOperators.contains(c2) && !binaryOperators.contains(c1)) {
-                    res += '.';
-                }
+            // Insert '.' only when:
+            // c1 is not an operator or a left parenthesis
+            // AND c2 is not an operator or a right parenthesis
+            if ((Character.isLetterOrDigit(c1) || c1 == ')' || c1 == '*' || c1 == '+' || c1 == '?')
+                    && (Character.isLetterOrDigit(c2) || c2 == '(')) {
+                res.append('.');
             }
         }
-        res += regex.charAt(regex.length() - 1);
+        res.append(regex.charAt(regex.length() - 1));
 
-        return res;
+        return res.toString();
     }
 
     /**

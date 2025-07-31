@@ -13,7 +13,7 @@ public class RandomPatternGen {
             //String command = "node_modules/.bin/regexgen aab aaab aaaabc 4e453 alta aaabccb";
 
             RandomTextToRegexgen randomTextToRegexgen = new RandomTextToRegexgen();
-            randomTextToRegexgen.main();
+            //randomTextToRegexgen.main();
 
             List<String> randomWordList = randomTextToRegexgen.main();
             String baseString = "node_modules/.bin/regexgen ";
@@ -51,7 +51,8 @@ public class RandomPatternGen {
                         replace("?",randomChar).
                         replace("[","+").
                         replace("]","*");
-                System.out.println(sophisticaedLine);
+                System.out.println("Ez az igazi regex: "+sophisticaedLine);
+                // TODO: ...
             }
 
             // A parancs lefutásának várása
@@ -66,7 +67,8 @@ public class RandomPatternGen {
     }
 
     private static String getSaltString() {
-        String SALTCHARS = "abcdefghijklmnopqrsztyxz";
+        //String SALTCHARS = "abcdefghijklmnopqrsztyxz";
+        String SALTCHARS = "abc";
         StringBuilder salt = new StringBuilder();
         Random rnd = new Random();
         while (salt.isEmpty()) { // length of the random string.

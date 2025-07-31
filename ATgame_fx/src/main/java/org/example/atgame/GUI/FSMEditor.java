@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import org.example.atgame.DFAMinimization.MainMini;
 import org.example.atgame.GlueComponents.FileComparator;
 import org.example.atgame.GlueComponents.TransitionConverter;
+import org.example.atgame.NFAtoDFA.NFA_to_DFA;
 import org.example.atgame.RegexToDFA.UserNFAtoDFA;
 
 import java.io.BufferedWriter;
@@ -246,11 +247,16 @@ public class FSMEditor {
          */
         FileComparator fileComparator = new FileComparator();
 
+        //TODO: megjeleníteni GUI-n
         boolean areFilesEqual = fileComparator.compareFiles("sampleFSM/minUserDFA.txt", "sampleFSM/minMachineDFA.txt");
         if (areFilesEqual) {
             System.out.println("Egyezik");
+            //return "Az általad készített automata megfelelő.";
+            showAlert("Az általad készített automata megfelelő.", "GOOD!");
         } else {
             System.out.println("Nem egyezik");
+            //return "Az általad készített automata nem megfelelő.";
+            showAlert("Az általad készített automata nem megfelelő.", "WRONG!");
         }
 
     }
